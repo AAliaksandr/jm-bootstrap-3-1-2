@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/add-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/added-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/all-users.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments/all-users.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments/head.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments/home-page-table.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments/modal-edit.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments/parts.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages/fragments" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/index.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/update-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/updated-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+      </map>
+    </option>
+  </component>
+</project>

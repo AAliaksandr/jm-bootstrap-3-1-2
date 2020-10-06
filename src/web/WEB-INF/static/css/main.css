@@ -1,0 +1,6 @@
+.borders-in-user-data {
+    padding: 3px;
+    border: black solid 1px;
+    width: fit-content;
+    min-width: 174px;
+}

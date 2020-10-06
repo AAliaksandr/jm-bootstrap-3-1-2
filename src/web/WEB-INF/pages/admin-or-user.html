@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head th:replace="~{fragments/head::head}"></head>
+    <body>
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row" th:replace="~{fragments/header::header}"></div>
+            <div class="row">
+                <div class="col-2 p-0">
+                    <div class="row" th:replace="~{fragments/left-side::left-side}">
+                    </div>
+                </div>
+                <div class="col-9 bg-gradient-light">
+                    <h1 th:text="${#strings.equals(#request.getRequestURI(), '/admin')} ? 'Admin panel' : 'User information-page'"></h1>
+                    <!--                        <div > the reqestpath is <span th:if="${#strings.equals(#request.getRequestURI(), '/admin')}" th:text="${#request.getRequestURI()}"></span></div>-->
+                    <div class="row"
+                         th:replace="${#strings.equals(#request.getRequestURI(), '/admin')} ? ~{fragments/admin-all-users-table::admin-all-users-table} : ~{}"></div>
+                    <div class="row"
+                         th:replace="${#strings.equals(#request.getRequestURI(), '/user')} ? ~{fragments/user-panel::user-panel} : ~{}"></div>
+                </div>
+                <div class="col-1"></div>
+                
+            </div>
+            <div class="row">
+                <div th:insert="~{fragments/jsFooter::jsFooter}"></div>
+            </div>
+            </div>
+        </div>
+    </body>
+</html>

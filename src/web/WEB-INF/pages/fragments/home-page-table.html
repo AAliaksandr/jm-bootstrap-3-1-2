@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="row" th:fragment="home-page-table">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col" th:text="#{table.name}">First Name</th>
+                    <th scope="col"th:text="#{table.lastName}">Last Name</th>
+                    <th scope="col" th:text="#{table.age}">Age</th>
+                    <th scope="col" th:text="#{table.email}">Email</th>
+                    <th scope="col" th:text="#{table.role}">Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="users" type="java.util.List<webBackend.model.User>"*/-->
+                <tr th:each="user : ${users}" th:class="${user.id == added}? 'alert-success'">
+                    <th scope="row">
+                        <div th:id="${user.id == added}? '#newuser'"><span th:text="${user.id}"></span>
+                        </div>
+                    </th>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td class="years"><span th:text="${user.age}"></span> years</td>
+                    <td th:text="${user.email != null} ? ${user.email} : 'no email'"></td>
+                    <td ><span th:if="${user.roles != null}" th:each="role : ${user.roles}" th:text="${role.getRole()}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

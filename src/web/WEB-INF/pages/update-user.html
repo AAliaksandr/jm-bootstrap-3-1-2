@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:replace="~{fragments/head}"></head>
+    <body>
+        <h1>Обновление пользователя</h1>
+        <div class="container-fluid">
+            <form action="#" th:action="@{/user/update}" th:object="${user}" method="post">
+                <div class="row-cols-md-1">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div>Id</div>
+                                <!--                <div><input type="text" th:text="${user.getId()}"/></div>-->
+                                <div><input type="text" th:field="*{id}"/></div>
+                            </div>
+                            <div class="form-group">
+                                <div>Имя</div>
+                                <div><input type="text" th:field="*{name}"/></div>
+                                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                            </div>
+                            <div class="form-group">
+                                <div>Фамилия</div>
+                                <div><input type="text" th:field="*{lastName}"/></div>
+                                <td th:if="${#fields.hasErrors('secondName')}" th:errors="*{lastName}">Name Error</td>
+                            </div>
+                            <div class="form-group">
+                                <div>Возраст</div>
+                                <div><input type="text" th:field="*{age}"/></div>
+                                <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name Error</td>
+                            </div>
+<!--                            <div class="form-group">
+                                <div>Номер паспорта</div>
+                                <div><input type="text" th:field="*{passport.series}"/></div>
+                            </div>-->
+                        </div>
+                    </div>
+                   <!-- <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col" th:each="car:*{cars}">
+                                    <h5>Машина <span th:text="${carStat.count}"></span></h5>
+                                    <div class="form-group">
+                                        <div>Модель</div>
+                                        <div><input type="text" th:field="*{cars[__${carStat.index}__].carModel}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>Номер</div>
+                                        <div><input type="text" th:field="*{cars[__${carStat.index}__].series}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>Цвет</div>
+                                        <div><input type="text" th:field="*{cars[__${carStat.index}__].color}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <br/>
+                    <input  class="btn btn-primary" type="submit" value="Отправить" />
+                </form>
+        </div>
+        <div th:insert="~{fragments/jsFooter}"></div>
+    </body>
+</html>

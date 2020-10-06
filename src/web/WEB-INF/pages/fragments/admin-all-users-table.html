@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin all users table</title>
+    </head>
+    <body>
+        <div class="row" th:fragment="admin-all-users-table">
+            <div class="col">
+                <div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab"
+                               aria-controls="users" aria-selected="true">Users table</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="new-tab" data-toggle="tab" href="#new" role="tab"
+                               aria-controls="new"
+                               aria-selected="false">New User</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+                        <table class="table table-striped">
+                            <thead class="thead-light">
+                            <tr><th colspan="8">All users</th></tr>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col" th:text="#{table.name}">First Name</th>
+                                <th scope="col" th:text="#{table.lastName}">Last Name</th>
+                                <th scope="col" th:text="#{table.age}">Age</th>
+                                <th scope="col" th:text="#{table.email}">Email</th>
+                                <th scope="col" th:text="#{table.role}">Role</th>
+                                <th scope="col" th:text="#{table.edit}">Edit</th>
+                                <th scope="col" th:text="#{table.delete}">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--/*@thymesVar id="allUsers" type="java.util.List<webBackend.model.User>"*/-->
+                            <!--/*@thymesVar id="userOfAll" type="webBackend.model.User"*/-->
+                            <tr th:each="userOfAll : ${allUsers}" th:class="${userOfAll.id == added}? 'alert-success'">
+                                <th scope="row">
+                                    <div th:id="${userOfAll.id == added}? '#newuser'"><span th:text="${userOfAll.id}"></span>
+                                    </div>
+                                </th>
+                                <td th:text="${userOfAll.name}"></td>
+                                <td th:text="${userOfAll.lastName}"></td>
+                                <td class="years"><span th:text="${userOfAll.age}"></span> years</td>
+                                <td th:text="${userOfAll.email != null} ? ${userOfAll.email} : 'no email'"></td>
+                                <td><span th:if="${userOfAll.roles != null}" th:each="role1 : ${userOfAll.roles}"
+                                          th:text="${#strings.concat(role1.getRole(), ' ')}"></span></td>
+                                <td>
+                                    <button type="button" class="btn btn-info " data-toggle="modal" data-target="#modal-"
+                                            th:attrappend="data-target=${userOfAll.id}" th:text="#{table.edit}">
+<!--                                    <a class="text-light" th:href="@{/admin/update-user(id=${userOfAll.id})}" th:text="#{table.edit}"></a>-->
+                                    </button>
+                                    <div th:replace="~{fragments/modal-edit::modal-edit}"></div>
+
+                                </td>
+                                <td class="last_td"><button type="button" class="btn btn-danger"><a class="text-light" th:href="@{/admin/delete-user(id=${userOfAll.id})}"
+                                                                                                    th:text="#{table.delete}">Удалить</a></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
+                        <!--/*@thymesVar id="newUser" type="webBackend.model.User"*/-->
+                        <form action="#" th:action="@{/admin/adduser}" th:object="${newUser}" method="post">
+                            <div class="row-cols-md-1">
+                                <div class="row">
+                                    <div class="col justify-content-center">
+                                        <div class="form-group">
+                                            <label th:for="*{name}">Имя</label>
+                                            <div class="input_data"><input type="text" th:field="*{name}"/></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label th:for="*{lastName}">Фамилия</label>
+                                            <div class="input_data"><input type="text" th:field="*{lastName}"/></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label th:for="*{age}">Возраст</label>
+                                            <div class="input_data"><input type="text" th:field="*{age}"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="*{email}">Email</label>
+                                            <div class="input_data"><input type="text" th:field="*{email}"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="*{password}">Password</label>
+                                            <div class="input_data"><input type="text" th:field="*{password}"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label th:for="*{roles}">Роли</label>
+                                            <select multiple class="form-control " th:field="*{roles}">
+                                                <option th:value="ADMIN" th:utext="ADMIN">ADMIN</option>
+                                                <option th:value="USER" th:utext="USER">USER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <input  class="btn btn-primary" type="submit"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

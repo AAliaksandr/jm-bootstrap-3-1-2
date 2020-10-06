@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head}"></head>
+    <body>
+        <h1>Пользователь добавлен</h1>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <table class="table ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Возраст</th>
+                            <th scope="col">Серия пасспорта</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row" th:text="${added_user.name}"></td>
+                                <td scope="row" th:text="${added_user.secondName}"></td>
+                                <td scope="row" ><span th:text="${added_user.age}"></span> years</td>
+                                <td scope="row" th:text="${added_user.passport.series}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th colspan="3" scope="col">Машины пользователя</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Модель</th>
+                            <th scope="col">Номер</th>
+                            <th scope="col">Цвет</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="added_user_car:${added_user.cars}">
+                            <td scope="row" th:text="${added_user_car.carModel}"></td>
+                            <td scope="row" th:text="${added_user_car.series}"></td>
+                            <td scope="row" th:text="${added_user_car.color}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+<!--                    //=========================================================-->
+                    <!--<div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">Имя</div>
+                                <div class="col-11"><span type="text" id="name" th:text="${added_user.name}"/></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">Фамилия</div>
+                                <div class="col-11"><span type="text" id="secondName"
+                                                              th:text="${added_user.secondName}"></span></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">Возраст</div>
+                                <div class="col-11"><span type="text" id="age" th:text="${added_user.age}"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">Номер паспорта</div>
+                                <div class="col-11"><span type="text" id="series"
+                                                              th:text="${added_user.passport.series}"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col" th:each="added_user_car:${added_user.cars}">
+                                    <div class="row">
+                                        <div class="col">Модель</div>
+                                        <div class="col"><span type="text" id="age2"
+                                                                      th:text="${added_user_car.carModel}"></span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">Номер</div>
+                                        <div class="col"><span type="text" id="age3"
+                                                                      th:text="${added_user_car.series}"></span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">Цвет</div>
+                                        <div class="col"><span type="text" id="age4"
+                                                                      th:text="${added_user_car.color}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="col">
+                    <div th:insert="~{fragments/parts :: table_all_users}">...</div>
+                </div>
+            </div>
+        </div>
+        <div th:insert="~{fragments/jsFooter}"></div>
+    </body>
+</html>

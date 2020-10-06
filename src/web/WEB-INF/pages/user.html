@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<div class="container-fluid">
+    <div class="col">
+        <div class="row" th:replace="~{fragments/header}"></div>
+        <div class="row">
+            <div class="col">
+                <div class="row" th:replace="fragments/left-side"></div>
+                <div class="row" th:replace="~{fragments/home-page-table}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div th:insert="~{fragments/jsFooter}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

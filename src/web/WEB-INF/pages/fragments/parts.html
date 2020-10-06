@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Users parts</title>
+    </head>
+    <body>
+        <div th:fragment="table_all_users">
+            <table class="table ">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Возраст</th>
+                    <th scope="col">Серия пасспорта</th>
+                    <th scope="col">Машины</th>
+                    <th scope="col" colspan="2">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>the added is <span th:if="${added} != null" th:text="${added}"></span></td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <th scope="row" th:text="${user.id}"><a th:href="@{'#newuser'}"
+                                                            th:if="${user.id == added}"></a></th>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.secondName}"></td>
+                    <td class="years"><span th:text="${user.age}"></span> years</td>
+                    <td th:text="${user.passport.series}"></td>
+                    <td class="cars">Количество: <span th:text="${#lists.size(user.cars)}"></span></br>
+<!--                        <table class="table ">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Модель</th>
+                                <th scope="col">Цвет</th>
+                                <th scope="col">Серия</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="car : ${user.cars}">
+                                <td th:text="${car.carModel}"></td>
+                                <td th:text="${car.color}"></td>
+                                <td th:text="${car.series}"></td>
+                            </tr>
+                            </tbody>
+                        </table>-->
+                    </td>
+                    <td><a th:href="@{/user/update(id=${user.id})}">Изменить</a></td>
+                    <td class="last_td"><a th:href = "@{/user/delete(id=${user.id}, name=${user.name}, secondName=${user.secondName})}">Удалить</a></td>
+                </tr>
+                <tr><td class="add_user last_td" colspan="8"><a th:href = "@{/user/add}">Добавить пользователя</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

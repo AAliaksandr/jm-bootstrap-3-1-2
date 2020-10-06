@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>header</title>
+    </head>
+    <body>
+        <div class="row justify-content-end navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="header">
+            <div class="col-3">
+<!--                <div class="row" th:if="${authorisedUser != null}" th:object="${authorisedUser}">
+                    <span class="navbar-brand" th:each="role : *{roles}" th:text="${authorisedUser.email + ' with roles: ' + role.getRole()}">Logo</span>
+                </div>-->
+                <div class="row" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+                    <span class="navbar-brand"  sec:authentication="name">eee</span>
+                    <span class="navbar-brand"> with the role: </span>
+<!--                    <span class="navbar-brand" sec:authentication="principal.authorities">role</span>-->
+                    <span class="navbar-brand" th:each="principalRole : ${#authentication.getAuthorities()}" th:text="${principalRole.getAuthority()
+                    }">here must go the role</span>
+                </div>
+            </div>
+            <div th:class="${#strings.equals(#request.getRequestURI(),'/') ? 'col-7' : 'col-8'}"></div>
+            <div class="col" th:if="${#strings.equals(#request.getRequestURI(),'/')}">
+                <div class="row">
+                    <a class="nav-link" th:href="@{/signup}"th:text="#{signup}">Sign Up</a>
+                </div>
+            </div>
+            <div class="col" th:if="${#strings.equals(#request.getRequestURI(),'/')}">
+                <div class="row">
+                    <a class="nav-link" th:href="@{/login}" th:text="#{login}">Login</a>
+                </div>
+            </div>
+            <div class="col" th:if="${not #strings.equals(#request.getRequestURI(),'/') && not #strings.equals(#request.getRequestURI(),'/signup')}">
+                <div class="row">
+                    <a class="nav-link" th:href="@{/logout}" th:text="#{logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

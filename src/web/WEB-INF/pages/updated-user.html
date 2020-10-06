@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:replace="~{fragments/head}"></head>
+    <body>
+    <h1>Данные пользователя обновлены.</h1>
+        <div class="container-fluid">
+            <div class="row-cols-md-1">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div>Имя</div>
+                            <div class="borders-in-user-data"><span id="name" th:text="${updated_user.name}"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div>Фамилия</div>
+                            <div class="borders-in-user-data"><span id="secondName" th:text="${updated_user.lastName}"></span></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div>Возраст</div>
+                            <div class="borders-in-user-data"><span id="age" th:text="${updated_user.age}"></span></div>
+                        </div>
+
+<!--                        <div class="form-group">
+                            <div>Номер паспорта</div>
+                            <div class="borders-in-user-data"><span id="series" th:text="${updated_user.passport.series}"></span></div>
+                        </div>-->
+                    </div>
+                </div>
+<!--                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" th:each="updated_user_car:${updated_user.cars}">
+                                <h5>Машина <span th:text="${updated_user_carStat.count}"></span></h5>
+                                <div class="form-group">
+                                    <div>Модель</div>
+                                    <div class="borders-in-user-data"><span id="age2" th:text="${updated_user_car.carModel}"></span></div>
+                                </div>
+                                <div class="form-group">
+                                    <div>Номер</div>
+                                    <div class="borders-in-user-data"><span id="age3" th:text="${updated_user_car.series}"></span></div>
+                                </div>
+                                <div class="form-group">
+                                    <div>Цвет</div>
+                                    <div class="borders-in-user-data"><span id="age4" th:text="${updated_user_car.color}"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+    <!--            <div>
+                    <div th:insert="~{fragments/parts :: table_all_users}">...</div>
+                </div>-->
+            </div>
+        </div>
+        <div th:insert="~{fragments/jsFooter}"></div>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:replace="~{fragments/head}"></head>
+    <body>
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row" th:replace="~{fragments/header}"></div>
+            <div class="row">
+                <div class="col ">
+                    <div class="container" >
+                        <div class="row" th:replace="~{fragments/home-page-table}">
+                    </div>
+                        <!-- <div class="alert alert-secondary"><p>There are: <span th:text="${count}"></span> users in
+                             the
+                             database
+                         </p></div>
+                         <div class="alert alert-success" th:if="${dname} != null and ${dsname} != null"
+                              th:text="'Пользователь ' + ${dname} + ' ' + ${dsname} + ' удалён'"></div>
+                         &lt;!&ndash;            <div th:insert="~{fragments/parts :: table_all_users}">...</div>&ndash;&gt;
+                         <table class="table table-striped">
+                             <thead class="thead-light">
+                             <tr>
+                                 <th scope="col">Id</th>
+                                 <th scope="col" th:text="#{table.name}">First Name</th>
+                                 <th scope="col"th:text="#{table.lastName}">Last Name</th>
+                                 <th scope="col" th:text="#{table.age}">Age</th>
+                                 <th scope="col" th:text="#{table.email}">Email</th>
+                                 <th scope="col" th:text="#{table.role}">Role</th>
+                                 <th scope="col" th:text="#{table.passport}">Passport</th>
+                                 <th scope="col" th:text="#{table.cars}">Cars</th>
+                                 <th scope="col" th:text="#{table.edit}">Edit</th>
+                                 <th scope="col" th:text="#{table.delete}">Delete</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             <tr th:each="user : ${users}" th:class="${user.id == added}? 'alert-success'">
+                                 <th scope="row">
+                                     <div th:id="${user.id == added}? '#newuser'"><span th:text="${user.id}"></span>
+                                     </div>
+                                 </th>
+                                 <td th:text="${user.name}"></td>
+                                 <td th:text="${user.lastName}"></td>
+                                 <td class="years"><span th:text="${user.age}"></span> years</td>
+                                 <td th:text="${user.email != null} ? ${user.email} : 'no email'"></td>
+                                 <td ><span th:if="${user.roles != null}" th:each="role : ${user.roles}" th:text="${role}"></span></td>
+                                 <td th:text="${user.passport.series}"></td>
+                                 <td class="cars">Количество: <span th:text="${#lists.size(user.cars)}"></span>
+                                     &lt;!&ndash;                        <table class="table ">
+                                                                 <thead class="thead-dark">
+                                                                 <tr>
+                                                                     <th scope="col">Модель</th>
+                                                                     <th scope="col">Цвет</th>
+                                                                     <th scope="col">Серия</th>
+                                                                 </tr>
+                                                                 </thead>
+                                                                 <tbody>
+                                                                 <tr th:each="car : ${user.cars}">
+                                                                     <td th:text="${car.carModel}"></td>
+                                                                     <td th:text="${car.color}"></td>
+                                                                     <td th:text="${car.series}"></td>
+                                                                 </tr>
+                                                                 </tbody>
+                                                             </table>&ndash;&gt;
+                                 </td>
+                                 <td><a th:href="@{/user/update(id=${user.id})}" th:text="#{table.edit}">Изменить</a></td>
+                                 <td class="last_td"><a
+                                         th:href="@{/user/delete(id=${user.id}, name=${user.name}, secondName=${user.lastName})}" th:text="#{table.delete}">Удалить</a>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td class="add_user last_td" colspan="10"><a th:href="@{/user/add}">Добавить
+                                     пользователя</a>
+                                 </td>
+                             </tr>
+                             </tbody>
+                         </table>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div th:insert="~{fragments/jsFooter}"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

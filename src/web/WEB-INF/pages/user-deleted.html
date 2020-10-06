@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head}"></head>
+    <body>
+        <div class="container-fluid">
+            <div class="message" th:if="${onDeleteMessage} != null" th:text="${onDeleteMessage}"></div>
+            <div class="message" th:if="${onErrorMessage} != null" th:text="${onErrorMessage}"></div>
+            <div th:insert="~{fragments/parts :: users_count}"></div>
+            <div th:insert="~{fragments/parts :: table_all_users}"></div>
+        </div>
+        <div th:insert="~{fragments/jsFooter}"></div>
+    </body>
+</html>
