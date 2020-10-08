@@ -1,7 +1,5 @@
 package webBackend.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -20,21 +18,19 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import webBackend.model.AllRoles;
 import webBackend.service.CreateFakeUsers;
 import webBackend.service.StringToRoleConverter;
-import webBackend.service.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
 import javax.validation.Validator;
@@ -46,7 +42,6 @@ import java.util.Properties;
 @EnableWebMvc
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan("webBackend")
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
@@ -118,20 +113,6 @@ public class WebConfig implements WebMvcConfigurer {
         return dataSource;
     }
 
-/*    @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
-
-        Properties props=new Properties();
-        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(User.class, Car.class, Passport.class);
-        return factoryBean;
-    }*/
-
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
@@ -146,7 +127,7 @@ public class WebConfig implements WebMvcConfigurer {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan(new String[]{"webBackend"});
+        em.setPackagesToScan("webBackend");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -155,13 +136,7 @@ public class WebConfig implements WebMvcConfigurer {
         return em;
     }
 
-/*    @Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
-        return transactionManager;
-    }*/
-
+    // This is the transaction configuration to use with JPA entityManager (not with Hibernate sessionFactory)
         @Bean
         public PlatformTransactionManager getTransactionManager() {
             JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -213,17 +188,6 @@ public class WebConfig implements WebMvcConfigurer {
 
         return localeResolver;
     }
-
-    /* If user disable cookie then you can use SessionLocaleResolver instead. */
-/*   @Bean(name = "localeResolver")
-    public SessionLocaleResolver getSessionLocaleResolver(){
-      // Create a SessionLocaleResolver object.
-      SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        // Set default locale in session.
-      localeResolver.setDefaultLocale(Locale.ENGLISH);
-        return localeResolver;
-    }*/
-
 
     /* The LocaleChangeInterceptor is a interceptor that will intercept user locale change by a parameter value.
      * For example, if we set the locale change parameter name is locale, then request url http://localhost:8088/index.jsp?locale=en will change
