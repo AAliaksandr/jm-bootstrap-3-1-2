@@ -4,12 +4,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -148,7 +147,7 @@ public class User implements UserDetails {
                 .append(this.name)
                 .append("\n the email is: ")
                 .append(this.email)
-                .append("\n the passowrd is: ")
+                .append("\n the password is: ")
                 .append(this.password).toString();
     }
 }

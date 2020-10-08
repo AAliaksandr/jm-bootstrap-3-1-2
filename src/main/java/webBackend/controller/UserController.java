@@ -111,6 +111,13 @@ public class UserController {
         return "admin-or-user";
     }*/
 
+    @GetMapping(value = "/user")
+    public String getUserProfile(Principal principal, Model model) {
+        model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
+        model.addAttribute("title", "User Profile");
+        return "admin-or-user";
+    }
+
     @GetMapping("/admin/add")
     public String getAddUserForm(Model model) {
         User user = new User();

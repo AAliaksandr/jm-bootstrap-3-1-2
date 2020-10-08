@@ -58,8 +58,14 @@
                                     <div th:replace="~{fragments/modal-edit::modal-edit}"></div>
 
                                 </td>
-                                <td class="last_td"><button type="button" class="btn btn-danger"><a class="text-light" th:href="@{/admin/delete-user(id=${userOfAll.id})}"
-                                                                                                    th:text="#{table.delete}">Удалить</a></button>
+                                <td class="last_td">
+                                    <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#modal-delete-"
+                                            th:attrappend="data-target=${userOfAll.id}" th:text="#{table.delete}">
+                                        <!--<a class="text-light" th:href="@{/admin/delete-user(id=${userOfAll.id})}"
+                                                                                                    th:text="#{table.delete}">Удалить
+                                    </a>-->
+                                    </button>
+                                    <div th:replace="~{fragments/modal-delete::modal-delete}"></div>
                                 </td>
                             </tr>
                             </tbody>
