@@ -18,7 +18,6 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -32,7 +31,6 @@ import webBackend.service.CreateFakeUsers;
 import webBackend.service.StringToRoleConverter;
 
 import javax.sql.DataSource;
-import javax.validation.Validator;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
