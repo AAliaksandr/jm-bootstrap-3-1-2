@@ -3,7 +3,6 @@ package webBackend.config;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -57,10 +56,10 @@ public class WebConfig implements WebMvcConfigurer {
     public CharacterEncodingFilter filterEncoding() {
          return new CharacterEncodingFilter("UTF-8", true);
      }
-     @Bean
-     public Validator getHibernateValidator() {
-         return new LocalValidatorFactoryBean();
-     }
+//     @Bean
+//     public Validator getHibernateValidator() {
+//         return new LocalValidatorFactoryBean();
+//     }
 
     //  Thymeleaf configuration beans
     @Bean
