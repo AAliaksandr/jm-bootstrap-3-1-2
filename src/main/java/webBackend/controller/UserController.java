@@ -117,15 +117,15 @@ public class UserController {
         model.addAttribute("title", "User Profile");
         return "admin-or-user";
     }
-
+/*
     @GetMapping("/admin/add")
     public String getAddUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("title", "Adding a user");
         return "add-user";
-    }
-
+    }*/
+/*
     @PostMapping("/admin/adduser")
     public String getSubmittedAddUserForm(@ModelAttribute User newUser, Model model) {
         try {
@@ -138,11 +138,11 @@ public class UserController {
 
 
         return "redirect:/admin";
-    }
+    }*/
 
-    @Validated
+
     @PostMapping("/admin/update-user")
-    public String doUpdateUser(@RequestParam Map<String, String> params,Model model) {
+    public String doUpdateUser(@RequestParam("roles") Role newRole, @RequestParam Map<String, String> params, Model model) {
         User updateUser = new User();
         updateUser.setId(Long.parseLong(params.get("id")));
         updateUser.setName(params.get("name"));
@@ -151,16 +151,16 @@ public class UserController {
         updateUser.setEmail(params.get("email"));
         updateUser.setPassword(params.get("password"));
         //============================
-           params.entrySet().stream()
+        params.entrySet().stream()
                 .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));
 
         //============================
         List<Role> userRoles = new ArrayList<>();
-        if (params.containsKey("roles")) {
+/*        if (params.containsKey("roles")) {
             System.out.println("The roles in params are: " + params.get("roles"));
             userRoles.add(new Role(params.get("roles")));
-        }
-
+        }*/
+        userRoles.add(newRole);
         updateUser.setRoles(userRoles);
         userService.updateUser(updateUser);
         model.addAttribute("updated_user", updateUser);
@@ -168,16 +168,10 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/delete-user")
-    public String deleteUser (@ModelAttribute User user, Model model) {
-        userService.deleteUser(user.getId());
-        String url = new StringBuilder()
-                .append("redirect:/admin?dname=")
-                .append(user.getName())
-                .append("&dsname=")
-                .append(user.getLastName())
-                .toString();
-        return url;
+    @PostMapping("/admin/delete-user")
+    public String deleteUser (@RequestParam("id") long id, Model model) {
+        userService.deleteUser(id);
+        return "redirect:/admin";
     }
 
     @GetMapping(value = "/signup")
