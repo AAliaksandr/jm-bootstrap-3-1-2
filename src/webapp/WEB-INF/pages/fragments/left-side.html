@@ -9,16 +9,16 @@
         <div class="col p-0">
             <div class="row-12 mt-2">
                 <ul class="list-group">
-                    <li th:class="${#strings.equals(#request.getRequestURI(), '/user')} ? 'list-group-item active' : 'list-group-item'"
-                        th:if="${#strings.equals(#request.getRequestURI(), '/admin') || #strings.equals(#request.getRequestURI(), '/user')}">
-
-                        <a th:class="${#strings.equals(#request.getRequestURI(), '/user')} ? 'text-light' : 'text-primary'"   th:href="@{/user}">User</a>
-                    </li>
                     <li th:class="${#strings.equals(#request.getRequestURI(), '/admin')} ? 'list-group-item active' : 'list-group-item'"
                         th:if="${#strings.equals(#request.getRequestURI(), '/admin')}">
 
                         <a th:class="${#strings.equals(#request.getRequestURI(), '/admin')} ? 'text-light' : 'text-primary'"
                            th:href="@{/admin}">Admin</a>
+                    </li>
+                    <li th:class="${#strings.equals(#request.getRequestURI(), '/user')} ? 'list-group-item active' : 'list-group-item'"
+                        th:if="${#strings.equals(#request.getRequestURI(), '/admin') || #strings.equals(#request.getRequestURI(), '/user')}">
+
+                        <a th:class="${#strings.equals(#request.getRequestURI(), '/user')} ? 'text-light' : 'text-primary'"   th:href="@{/user}">User</a>
                     </li>
                 </ul>
             </div>
