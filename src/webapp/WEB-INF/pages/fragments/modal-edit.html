@@ -24,7 +24,7 @@
                                         <div class="form-group">
                                             <div>Id</div>
                                             <div>
-                                                <input type="text" th:name="id" th:value="${userOfAll.id}" readonly/>
+                                                <input class="bg-light" type="text" th:name="id" th:value="${userOfAll.id}" readonly/>
                                             </div>
     <!--                                        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</td>-->
                                         </div>
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Роли</label>
-                                            <select size="2" th:multiple class="form-control" th:name="roles">
+                                            <select size="2" multiple="multiple" class="form-control" th:name="roles">
                                                 <!--/*@thymesVar id="allTheRoles" type="java.util.List<java.lang.String>"*/-->
                                                 <option th:each="rolem : ${allTheRoles}" th:name="${rolem}" th:value="${rolem}" th:text="${rolem}">ADMIN</option>
                                             </select>

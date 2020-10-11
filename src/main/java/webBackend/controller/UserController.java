@@ -9,6 +9,7 @@ import webBackend.model.AllRoles;
 import webBackend.model.Role;
 import webBackend.model.User;
 import webBackend.service.CreateFakeUsers;
+import webBackend.service.StringsToUserConverter;
 import webBackend.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -142,8 +143,8 @@ public class UserController {
 
 
     @PostMapping("/admin/update-user")
-    public String doUpdateUser(@RequestParam("roles") Role newRole, @RequestParam Map<String, String> params, Model model) {
-        User updateUser = new User();
+    public String doUpdateUser(@RequestParam Map<String, String> updateUser, Model model) {
+/*        User updateUser = new User();
         updateUser.setId(Long.parseLong(params.get("id")));
         updateUser.setName(params.get("name"));
         updateUser.setLastName(params.get("lastName"));
@@ -156,13 +157,13 @@ public class UserController {
 
         //============================
         List<Role> userRoles = new ArrayList<>();
-/*        if (params.containsKey("roles")) {
+*//*        if (params.containsKey("roles")) {
             System.out.println("The roles in params are: " + params.get("roles"));
             userRoles.add(new Role(params.get("roles")));
-        }*/
+        }*//*
         userRoles.add(newRole);
-        updateUser.setRoles(userRoles);
-        userService.updateUser(updateUser);
+        updateUser.setRoles(userRoles);*/
+        userService.updateUser( new StringsToUserConverter().convert(updateUser));
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
         return "redirect:/admin";
