@@ -100,33 +100,13 @@ public class UserController {
         return "admin-or-user";
     }
 
-/*    @GetMapping(value = "/admin")
-    public String getAdminProfile(@ModelAttribute Map<String, String> attributes, Principal principal, Model model) {
-        model.addAttribute("allUsers", userService.getAllUsers());
-        model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
-        model.addAttribute("title", "Admin Profile");
-        model.addAttribute("newUser", new User());
-        if (attributes.containsKey("added")) {
-            model.addAttribute("added", "yes");
-        }
-        return "admin-or-user";
-    }*/
-
     @GetMapping(value = "/user")
     public String getUserProfile(Principal principal, Model model) {
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "User Profile");
         return "admin-or-user";
     }
-/*
-    @GetMapping("/admin/add")
-    public String getAddUserForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("title", "Adding a user");
-        return "add-user";
-    }*/
-/*
+
     @PostMapping("/admin/adduser")
     public String getSubmittedAddUserForm(@ModelAttribute User newUser, Model model) {
         try {
@@ -139,30 +119,11 @@ public class UserController {
 
 
         return "redirect:/admin";
-    }*/
+    }
 
 
     @PostMapping("/admin/update-user")
     public String doUpdateUser(@RequestParam Map<String, String> updateUser, Model model) {
-/*        User updateUser = new User();
-        updateUser.setId(Long.parseLong(params.get("id")));
-        updateUser.setName(params.get("name"));
-        updateUser.setLastName(params.get("lastName"));
-        updateUser.setAge(Long.parseLong(params.get("age")));
-        updateUser.setEmail(params.get("email"));
-        updateUser.setPassword(params.get("password"));
-        //============================
-        params.entrySet().stream()
-                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));
-
-        //============================
-        List<Role> userRoles = new ArrayList<>();
-*//*        if (params.containsKey("roles")) {
-            System.out.println("The roles in params are: " + params.get("roles"));
-            userRoles.add(new Role(params.get("roles")));
-        }*//*
-        userRoles.add(newRole);
-        updateUser.setRoles(userRoles);*/
         userService.updateUser( new StringsToUserConverter().convert(updateUser));
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
