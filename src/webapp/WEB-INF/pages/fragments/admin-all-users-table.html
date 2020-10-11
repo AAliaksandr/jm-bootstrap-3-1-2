@@ -39,7 +39,7 @@
                             <tbody>
                             <!--/*@thymesVar id="allUsers" type="java.util.List<webBackend.model.User>"*/-->
                             <!--/*@thymesVar id="userOfAll" type="webBackend.model.User"*/-->
-                            <tr th:each="userOfAll : ${allUsers}" th:class="${userOfAll.id == added}? 'alert-success'">
+                            <tr th:each="userOfAll, userOfAllStat : ${allUsers}" th:class="${userOfAll.id == added}? 'alert-success'">
                                 <th scope="row">
                                     <div th:id="${userOfAll.id == added}? '#newuser'"><span th:text="${userOfAll.id}"></span>
                                     </div>

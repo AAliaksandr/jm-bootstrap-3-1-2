@@ -16,8 +16,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <!--/*@thymesVar id="updateUser" type="webBackend.model.User"*/-->
-                    <form  action="#" th:action="@{/admin/update-user}"  method="post" accept-charset="UTF-8">
+                    <!-- /*@thymesVar id="updateUser" type="webBackend.model.User"*/-->
+                    <!-- /*@thymesVar id="allTheRoles" type="webBackend.service.RoleManager"*/-->
+                    <form  action="#" th:action="@{/admin/update-user}"  method="post" accept-charset="UTF-8" th:object="${allTheRoles}">
                         <div class="modal-body flex-column d-flex align-items-center">
                                 <div class="row">
                                     <div class="col">
@@ -65,9 +66,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label >Роли</label>
-                                            <select size="2" multiple="multiple" class="form-control" th:name="roles">
-                                                <!--/*@thymesVar id="allTheRoles" type="java.util.List<java.lang.String>"*/-->
-                                                <option th:each="rolem : ${allTheRoles}" th:name="${rolem}" th:value="${rolem}" th:text="${rolem}">ADMIN</option>
+                                            <!--/*@thymesVar id="allRoles" type="webBackend.service.RoleManager"*/-->
+                                            <select size="2" class="form-control" th:field="*{allRoles}" th:multiple="multiple">
+                                                <option th:each="rolem : *{allFields}" th:name="${rolem}"
+                                                        th:value="${rolem}" th:utext="${rolem}">
+                                                </option>
                                             </select>
                                         </div>
                                     </div>

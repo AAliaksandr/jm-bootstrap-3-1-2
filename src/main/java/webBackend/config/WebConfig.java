@@ -26,7 +26,7 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-import webBackend.model.AllRoles;
+import webBackend.service.RoleManager;
 import webBackend.service.CreateFakeUsers;
 import webBackend.service.StringToRoleConverter;
 
@@ -219,9 +219,9 @@ public class WebConfig implements WebMvcConfigurer {
         return new SpringSecurityDialect();
     }
 
-    @Bean
-    public AllRoles allRoles() {
-        return new AllRoles();
+    @Bean(name="AllRoles")
+    public RoleManager allRoles() {
+        return new RoleManager();
     }
 
     @Override

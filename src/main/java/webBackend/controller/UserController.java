@@ -3,9 +3,8 @@ package webBackend.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import webBackend.model.AllRoles;
+import webBackend.service.RoleManager;
 import webBackend.model.Role;
 import webBackend.model.User;
 import webBackend.service.CreateFakeUsers;
@@ -25,14 +24,14 @@ public class UserController {
     private final UserService userService;
     private final Validator validator;
     private final CreateFakeUsers createFakeUsers;
-    private final AllRoles allRoles;
+    private final RoleManager roleManager;
 
 
-    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, AllRoles allRoles) {
+    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, RoleManager roleManager) {
         this.userService = userService;
         this.validator = validator;
         this.createFakeUsers = createFakeUsers;
-        this.allRoles = allRoles;
+        this.roleManager = roleManager;
     }
 
     @PostConstruct
@@ -92,7 +91,8 @@ public class UserController {
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "Admin Profile");
         model.addAttribute("newUser", new User());
-        model.addAttribute("allTheRoles", allRoles.getAllRoles());
+        model.addAttribute("allTheRoles", new RoleManager());
+        model.addAttribute("userToUpdate", new User());
 /*        Map<String, Role> rolesMap = new HashMap<>();
         rolesMap.put("USER", new Role("USER"));
         rolesMap.put("ADMIN", new Role("ADMIN"));
@@ -123,8 +123,14 @@ public class UserController {
 
 
     @PostMapping("/admin/update-user")
-    public String doUpdateUser(@RequestParam Map<String, String> updateUser, Model model) {
-        userService.updateUser( new StringsToUserConverter().convert(updateUser));
+    public String doUpdateUser(@ModelAttribute RoleManager allTheRoles, @RequestParam Map<String, String> updateUser, Model model) {
+        //----------------------------------
+        updateUser.entrySet().stream()
+                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));
+        //================================================
+        User updateUSer = new StringsToUserConverter().convert(updateUser);
+        updateUSer.setRoles(allTheRoles.getRoles());
+        userService.updateUser(updateUSer);
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
         return "redirect:/admin";

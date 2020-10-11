@@ -20,9 +20,9 @@ public class StringsToUserConverter implements Converter<Map<String, String>, Us
         updateUser.setEmail(controllerParams.get("email"));
         updateUser.setPassword(controllerParams.get("password"));
 
-        List<Role> userRoles = new ArrayList<>();
-        userRoles.add(new Role(controllerParams.get("roles")));
-        updateUser.setRoles(userRoles);
+/*        List<Role> userRoles = new ArrayList<>();
+        userRoles.add(new Role(controllerParams.get("allTheRoles")));
+        updateUser.setRoles(userRoles);*/
 
         return updateUser;
     }
