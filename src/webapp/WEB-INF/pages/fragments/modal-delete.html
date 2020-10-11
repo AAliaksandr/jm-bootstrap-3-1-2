@@ -16,72 +16,72 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <!--/*@thymesVar id="updateUser" type="webBackend.model.User"*/-->
-                        <form  action="#" th:action="@{/admin/delete-user}"  method="post" accept-charset="UTF-8">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <div>Id</div>
-                                        <div>
-                                            <input type="text" th:name="id" th:value="${userOfAll.id}" readonly/>
+                    <!--/*@thymesVar id="updateUser" type="webBackend.model.User"*/-->
+                    <form  action="#" th:action="@{/admin/delete-user}"  method="post" accept-charset="UTF-8">
+                        <div class="modal-body flex-column d-flex align-items-center">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <div>Id</div>
+                                            <div>
+                                                <input type="text" th:name="id" th:value="${userOfAll.id}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <div>First name</div>
-                                        <div>
-                                            <input type="text" th:name="name" th:value="${userOfAll.name}" readonly/>
+                                        <div class="form-group">
+                                            <div>First name</div>
+                                            <div>
+                                                <input type="text" th:name="name" th:value="${userOfAll.name}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('name')}" th:errors="${userOfAll.name}">Name Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('name')}" th:errors="${userOfAll.name}">Name Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <div>Last name</div>
-                                        <div>
-                                            <input type="text" th:name="lastName" th:value="${userOfAll.lastName}" readonly/>
+                                        <div class="form-group">
+                                            <div>Last name</div>
+                                            <div>
+                                                <input type="text" th:name="lastName" th:value="${userOfAll.lastName}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('secondName')}" th:errors="${userOfAll.lastName}">Name Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('secondName')}" th:errors="${userOfAll.lastName}">Name Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <div>Age</div>
-                                        <div>
-                                            <input type="text" th:name="age" th:value="${userOfAll.age}" readonly/>
+                                        <div class="form-group">
+                                            <div>Age</div>
+                                            <div>
+                                                <input type="text" th:name="age" th:value="${userOfAll.age}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('age')}" th:errors="${userOfAll.age}">Age Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('age')}" th:errors="${userOfAll.age}">Age Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <div>Email</div>
-                                        <div>
-                                            <input type="text" th:name="email" th:value="${userOfAll.email}" readonly/>
+                                        <div class="form-group">
+                                            <div>Email</div>
+                                            <div>
+                                                <input type="text" th:name="email" th:value="${userOfAll.email}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('email')}" th:errors="${userOfAll.email}">Email Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('email')}" th:errors="${userOfAll.email}">Email Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <div>Password</div>
-                                        <div>
-                                            <input type="text" th:name="password" th:value="${userOfAll.password}" readonly/>
+                                        <div class="form-group">
+                                            <div>Password</div>
+                                            <div>
+                                                <input type="text" th:name="password" th:value="${userOfAll.password}" readonly/>
+                                            </div>
+    <!--                                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{userOfAll.password}">Name Error</td>-->
                                         </div>
-<!--                                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{userOfAll.password}">Name Error</td>-->
-                                    </div>
-                                    <div class="form-group">
-                                        <label >Роли</label>
-                                        <select size="2" th:multiple class="form-control" th:name="roles" readonly>
-                                            <!--/*@thymesVar id="allTheRoles" type="java.util.List<java.lang.String>"*/-->
-                                            <option th:each="rolem : ${userOfAll.roles}"
-                                                    th:name="${rolem.getRole()}"
-                                                    th:value="${rolem.getRole()}"
-                                                    th:text="${rolem.getRole()}">ADMIN</option>
-                                        </select>
+                                        <div class="form-group">
+                                            <label >Роли</label>
+                                            <select size="2" th:multiple class="form-control" th:name="roles" readonly>
+                                                <!--/*@thymesVar id="allTheRoles" type="java.util.List<java.lang.String>"*/-->
+                                                <option th:each="rolem : ${userOfAll.roles}"
+                                                        th:name="${rolem.getRole()}"
+                                                        th:value="${rolem.getRole()}"
+                                                        th:text="${rolem.getRole()}">ADMIN</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Delete</button>
+    <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
