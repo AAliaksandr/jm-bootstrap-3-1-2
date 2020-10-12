@@ -130,9 +130,13 @@ public class UserController {
 
     @PostMapping("/admin/update-user/{id}")
     public String doUpdateUser(@ModelAttribute AllUsersListAndModalsManager allUsers, @PathVariable int id, Model model) {
-        System.out.println("The size of List is: " + allUsers.getAllUsersForListAndModals().size());
-        allUsers.getAllUsersForListAndModals().stream().forEach(x -> System.out.println(x));
         User updateUser = allUsers.getAllUsersForListAndModals().get(id - 1);
+
+        if (updateUser.getRoles().isEmpty()) {
+            List<Role> roleOnOcasion = new ArrayList<>();
+            roleOnOcasion.add(new Role("USER"));
+            updateUser.setRoles(roleOnOcasion);
+        }
         userService.updateUser(updateUser);
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
