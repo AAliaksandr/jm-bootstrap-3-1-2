@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="jm-migrating-to-spring-boot-3-1-1@localhost" uuid="ff718d1a-5aa6-43b4-a51c-7d16da268f8b">
+    <data-source source="LOCAL" name="jm-bootstrap-3-1-2@localhost" uuid="80c0b14d-1b1b-4763-90ff-d06c415228c1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/jm-migrating-to-spring-boot-3-1-1</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/jm-bootstrap-3-1-2</jdbc-url>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
