@@ -107,7 +107,8 @@ public class UserController {
             userService.addUser(newUser);
         } catch (Exception e) {
             e.printStackTrace();
-            return "/admin/adduser";
+            model.addAttribute("errorMessage", "There has been an error: " + e.fillInStackTrace());
+            return "/error";
         }
         model.addAttribute("added", "yes");
         return "redirect:/admin";
@@ -130,7 +131,7 @@ public class UserController {
 
     @PostMapping("/admin/update-user/{id}")
     public String doUpdateUser(@ModelAttribute AllUsersListAndModalsManager allUsers, @PathVariable int id, Model model) {
-        User updateUser = allUsers.getAllUsersForListAndModals().get(id - 1);
+        User updateUser = allUsers.getAllUsersForListAndModals().get( allUsers.getAllUsersForListAndModals().size() - 1);
 
         if (updateUser.getRoles().isEmpty()) {
             List<Role> roleOnOcasion = new ArrayList<>();

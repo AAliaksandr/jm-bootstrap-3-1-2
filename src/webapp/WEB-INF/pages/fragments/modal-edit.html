@@ -22,10 +22,16 @@
                         <div class="modal-body flex-column d-flex align-items-center">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="form-group">
+                                        <div class="form-group d-none">
                                             <div>Id</div>
                                             <div>
                                                 <input class="bg-light" type="text" th:name="id" th:value="${userOfAll.id}" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div>Id</div>
+                                            <div>
+                                                <input class="bg-light" type="text" th:name="id" th:value="${userOfAll.id}" disabled/>
                                             </div>
     <!--                                        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</td>-->
                                         </div>
