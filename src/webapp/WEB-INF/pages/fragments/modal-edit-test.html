@@ -70,6 +70,8 @@
                                 <select size="2" th:multiple="multiple" class="form-control" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].roles}">
                                     <option th:each="rolem : ${allTheRoles.getAllFields()}" th:name="${rolem}"
                                             th:value="${rolem}" th:utext="${rolem}">
+<!--                                            th:with="roleList=${{allUsers.getAllUsersForListAndModals().get(__${userOfAllStat.index}__).roles}}"
+                                            th:selected="${#lists.contains(__${roleList}__, __${rolem}__)}">-->
                                     </option>
                                 </select>
                             </div>

@@ -1,5 +1,6 @@
 package webBackend.config;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -27,8 +28,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import webBackend.service.AllUsersListAndModalsManager;
-import webBackend.service.RoleManager;
 import webBackend.service.CreateFakeUsers;
+import webBackend.service.RoleManager;
 import webBackend.service.StringToRoleConverter;
 
 import javax.sql.DataSource;
@@ -51,16 +52,18 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-     @Bean
-    public CharacterEncodingFilter filterEncoding() {
-         return new CharacterEncodingFilter("UTF-8", true);
-     }
-//     @Bean
-//     public Validator getHibernateValidator() {
-//         return new LocalValidatorFactoryBean();
-//     }
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
 
-    //  Thymeleaf configuration beans
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(filter);
+        registrationBean.addUrlPatterns("/*");
+        return registrationBean;
+    }
+
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
