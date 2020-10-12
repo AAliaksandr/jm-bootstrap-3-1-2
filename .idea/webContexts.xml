@@ -14,6 +14,7 @@
         <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/index.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
         <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/update-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
         <entry key="file://$PROJECT_DIR$/src/web/WEB-INF/pages/updated-user.html" value="file://$PROJECT_DIR$/src/web/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/fragments/modal-edit-test.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/fragments" />
         <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/fragments/modal-edit.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/fragments" />
       </map>
     </option>

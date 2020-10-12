@@ -26,6 +26,7 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import webBackend.service.AllUsersListAndModalsManager;
 import webBackend.service.RoleManager;
 import webBackend.service.CreateFakeUsers;
 import webBackend.service.StringToRoleConverter;
@@ -222,6 +223,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean(name="AllRoles")
     public RoleManager allRoles() {
         return new RoleManager();
+    }
+
+    @Bean(name="allUsersAndModals")
+    public AllUsersListAndModalsManager getAllUsersListAndModalsManager() {
+        return  new AllUsersListAndModalsManager();
     }
 
     @Override

@@ -4,12 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import webBackend.service.RoleManager;
+import webBackend.service.*;
 import webBackend.model.Role;
 import webBackend.model.User;
-import webBackend.service.CreateFakeUsers;
-import webBackend.service.StringsToUserConverter;
-import webBackend.service.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -25,13 +22,15 @@ public class UserController {
     private final Validator validator;
     private final CreateFakeUsers createFakeUsers;
     private final RoleManager roleManager;
+    private final AllUsersListAndModalsManager allUsersAndModals;
 
 
-    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, RoleManager roleManager) {
+    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, RoleManager roleManager, AllUsersListAndModalsManager allUsersAndModals) {
         this.userService = userService;
         this.validator = validator;
         this.createFakeUsers = createFakeUsers;
         this.roleManager = roleManager;
+        this.allUsersAndModals = allUsersAndModals;
     }
 
     @PostConstruct
@@ -85,7 +84,8 @@ public class UserController {
 
     @GetMapping(value = "/admin")
     public String getAdminProfile(Principal principal, Model model) {
-        model.addAttribute("allUsers", userService.getAllUsers());
+//        model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("allUsers", allUsersAndModals.AllUsersForListAndModalsAndGetTheObject(userService.getAllUsers()));
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "Admin Profile");
         model.addAttribute("newUser", new User());
@@ -114,15 +114,26 @@ public class UserController {
     }
 
 
-    @PostMapping("/admin/update-user")
+/*    @PostMapping("/admin/update-user")
     public String doUpdateUser(@ModelAttribute RoleManager allTheRoles, @RequestParam Map<String, String> updateUser, Model model) {
         //----------------------------------
-/*        updateUser.entrySet().stream()
-                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));*/
+*//*        updateUser.entrySet().stream()
+                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));*//*
         //================================================
-        User updateUSer = new StringsToUserConverter().convert(updateUser);
+        User updateUser = new StringsToUserConverter().convert(updateUser);
         updateUSer.setRoles(allTheRoles.getUpdatedNewRoles());
-        userService.updateUser(updateUSer);
+        userService.updateUser(updateUser);
+        model.addAttribute("updated_user", updateUser);
+        model.addAttribute("title", "Corrected user");
+        return "redirect:/admin";
+    }*/
+
+    @PostMapping("/admin/update-user/{id}")
+    public String doUpdateUser(@ModelAttribute AllUsersListAndModalsManager allUsers, @PathVariable int id, Model model) {
+        System.out.println("The size of List is: " + allUsers.getAllUsersForListAndModals().size());
+        allUsers.getAllUsersForListAndModals().stream().forEach(x -> System.out.println(x));
+        User updateUser = allUsers.getAllUsersForListAndModals().get(id - 1);
+        userService.updateUser(updateUser);
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
         return "redirect:/admin";

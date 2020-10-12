@@ -16,61 +16,60 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--/*@thymesVar id="allUsers" type="java.util.List<webBackend.model.User>"*/-->
-            <!--/*@thymesVar id="userToUpdate" type="webBackend.model.User"*/-->
-            <form  action="#" th:action="@{/admin/update-user}"  method="post" accept-charset="UTF-8" th:object="${allUsers}">
-                // "${allUsers[__${userOfAllStat.index}__]}"
+            <!--/*@thymesVar id="allUsers" type="webBackend.service.AllUsersListAndModalsManager"*/-->
+            <form  action="#" th:action="@{/admin/update-user/{id}(id=${userOfAll.id})}"  method="post" accept-charset="UTF-8" th:object="${allUsers}">
+<!--               "${allUsers[__${userOfAllStat.index}__]}"-->
                 <div class="modal-body flex-column d-flex align-items-center">
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <div>Id</div>
                                 <div>
-                                    <input class="bg-light" type="text" th:name="id" th:field="${allUsers[__${userOfAllStat}__].id}" readonly/>
+                                    <input class="bg-light" type="text" th:name="id" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].id}" readonly/>
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</td>-->
                             </div>
                             <div class="form-group">
                                 <div>First name</div>
                                 <div>
-                                    <input type="text" th:name="name" th:field="${allUsers[__${userOfAllStat.index}__].name}"/>
+                                    <input type="text" th:name="name" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].name}"/>
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('name')}" th:errors="${userOfAll.name}">Name Error</td>-->
                             </div>
                             <div class="form-group">
                                 <div>Last name</div>
                                 <div>
-                                    <input type="text" th:name="lastName" th:field="${allUsers[__${userOfAllStat.index}__].lastName}" />
+                                    <input type="text" th:name="lastName" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].lastName}" />
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('secondName')}" th:errors="${userOfAll.lastName}">Name Error</td>-->
                             </div>
                             <div class="form-group">
                                 <div>Age</div>
                                 <div>
-                                    <input type="text" th:name="age" th:field="${allUsers[__${userOfAllStat.index}__].age}" />
+                                    <input type="text" th:name="age" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].age}" />
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('age')}" th:errors="${userOfAll.age}">Age Error</td>-->
                             </div>
                             <div class="form-group">
                                 <div>Email</div>
                                 <div>
-                                    <input type="text" th:name="email" th:field="${allUsers[__${userOfAllStat.index}__].email}" />
+                                    <input type="text" th:name="email" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].email}" />
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('email')}" th:errors="${userOfAll.email}">Email Error</td>-->
                             </div>
                             <div class="form-group">
                                 <div>Password</div>
                                 <div>
-                                    <input type="text" th:name="password" th:field="${allUsers[__${userOfAllStat.index}__].password}" />
+                                    <input type="text" th:name="password" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].password}" />
                                 </div>
                                 <!--                                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{userOfAll.password}">Name Error</td>-->
                             </div>
                             <div class="form-group">
                                 <label >Роли</label>
                                 <!--/*@thymesVar id="allTheRoles" type="webBackend.service.RoleManager"*/-->
-                                <select size="2" th:multiple="multiple" class="form-control" th:field="${allUsers[__${userOfAllStat.index}__].roles}">
+                                <select size="2" th:multiple="multiple" class="form-control" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].roles}">
                                     <option th:each="rolem : ${allTheRoles.getAllFields()}" th:name="${rolem}"
-                                            th:value="${rolem}" th:utext="${rolem}">ADMIN
+                                            th:value="${rolem}" th:utext="${rolem}">
                                     </option>
                                 </select>
                             </div>

@@ -37,9 +37,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--/*@thymesVar id="allUsers" type="java.util.List<webBackend.model.User>"*/-->
+                            <!--/*@thymesVar id="allUsers" type="webBackend.service.AllUsersListAndModalsManager"*/-->
                             <!--/*@thymesVar id="userOfAll" type="webBackend.model.User"*/-->
-                            <tr th:each="userOfAll, userOfAllStat : ${allUsers}" th:class="${userOfAll.id == added}? 'alert-success'">
+                            <tr th:each="userOfAll, userOfAllStat : ${allUsers.getAllUsersForListAndModals()}" th:class="${userOfAll.id == added}? 'alert-success'">
                                 <th scope="row">
                                     <div th:id="${userOfAll.id == added}? '#newuser'"><span th:text="${userOfAll.id}"></span>
                                     </div>
@@ -55,7 +55,7 @@
                                             th:attrappend="data-target=${userOfAll.id}" th:text="#{table.edit}">
 <!--                                    <a class="text-light" th:href="@{/admin/update-user(id=${userOfAll.id})}" th:text="#{table.edit}"></a>-->
                                     </button>
-                                    <div th:replace="~{fragments/modal-edit::modal-edit}"></div>
+                                    <div th:replace="~{fragments/modal-edit-test::modal-edit}"></div>
 
                                 </td>
                                 <td class="last_td">
