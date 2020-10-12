@@ -15,7 +15,7 @@ public class RoleManager implements Serializable {
     private final String ADMIN = "ADMIN";
     private final String USER = "USER";
     private List<String> allFields = new ArrayList<>();
-    private List<String> allRoles = new ArrayList<>();
+    private List<String> newRoles = new ArrayList<>();
 
     public RoleManager() {
         Field[] fields = this.getClass().getDeclaredFields();
@@ -37,27 +37,28 @@ public class RoleManager implements Serializable {
     public RoleManager setAllFields() {
         Field[] fields = this.getClass().getDeclaredFields();
         Arrays.stream(fields).filter(y -> Modifier.isFinal(y.getModifiers())).forEach(x -> this.allFields.add(x.getName()));
-
         return this;
     }
 
-    public void setAllRoles(List<String> allRoles) {
-        this.allRoles = allRoles;
+    public void setNewRoles(List<String> newRoles) {
+        this.newRoles = newRoles;
     }
 
-    public List<String> getAllRoles() {
-
-        return this.allRoles;
+    public List<String> getNewRoles() {
+        return this.newRoles;
     }
 
-    public List<Role> getRoles() {
-        System.out.println("the getRoles method in AllRoles");
+    public List<Role> getUpdatedNewRoles() {
+//        System.out.println("the getRoles method in AllRoles");
         List<Role> roles = new ArrayList<>();
-        for (String  s : this.allRoles) {
-            roles.add(new Role(s));
-            System.out.println(s);
+        if (!newRoles.isEmpty()) {
+            for (String s : this.newRoles) {
+                roles.add(new Role(s));
+                System.out.println(s);
+            }
+        } else {
+            roles.add(new Role("USER"));
         }
-
         return roles;
     }
 }

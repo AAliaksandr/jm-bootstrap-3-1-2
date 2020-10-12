@@ -67,7 +67,8 @@
                                         <div class="form-group">
                                             <label >Роли</label>
                                             <!--/*@thymesVar id="allRoles" type="webBackend.service.RoleManager"*/-->
-                                            <select size="2" class="form-control" th:field="*{allRoles}" th:multiple="multiple">
+                                            <select size="2" class="form-control" th:field="*{newRoles}"
+                                                    th:multiple="multiple">
                                                 <option th:each="rolem : *{allFields}" th:name="${rolem}"
                                                         th:value="${rolem}" th:utext="${rolem}">
                                                 </option>

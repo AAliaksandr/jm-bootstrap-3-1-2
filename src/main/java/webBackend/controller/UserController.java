@@ -85,18 +85,12 @@ public class UserController {
 
     @GetMapping(value = "/admin")
     public String getAdminProfile(Principal principal, Model model) {
-/*        Map<Long, User> users = new HashMap<>();
-        users.put()*/
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "Admin Profile");
         model.addAttribute("newUser", new User());
-        model.addAttribute("allTheRoles", new RoleManager());
+        model.addAttribute("allTheRoles", roleManager);
         model.addAttribute("userToUpdate", new User());
-/*        Map<String, Role> rolesMap = new HashMap<>();
-        rolesMap.put("USER", new Role("USER"));
-        rolesMap.put("ADMIN", new Role("ADMIN"));
-        model.addAttribute("rolesMap", rolesMap);*/
         return "admin-or-user";
     }
 
@@ -116,8 +110,6 @@ public class UserController {
             return "/admin/adduser";
         }
         model.addAttribute("added", "yes");
-
-
         return "redirect:/admin";
     }
 
@@ -125,11 +117,11 @@ public class UserController {
     @PostMapping("/admin/update-user")
     public String doUpdateUser(@ModelAttribute RoleManager allTheRoles, @RequestParam Map<String, String> updateUser, Model model) {
         //----------------------------------
-        updateUser.entrySet().stream()
-                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));
+/*        updateUser.entrySet().stream()
+                .forEach(e -> System.out.println(e.getKey() + ":" + e.getValue()));*/
         //================================================
         User updateUSer = new StringsToUserConverter().convert(updateUser);
-        updateUSer.setRoles(allTheRoles.getRoles());
+        updateUSer.setRoles(allTheRoles.getUpdatedNewRoles());
         userService.updateUser(updateUSer);
         model.addAttribute("updated_user", updateUser);
         model.addAttribute("title", "Corrected user");
