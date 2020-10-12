@@ -138,20 +138,20 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     // This is the transaction configuration to use with JPA entityManager (not with Hibernate sessionFactory)
-        @Bean
-        public PlatformTransactionManager getTransactionManager() {
-            JpaTransactionManager transactionManager = new JpaTransactionManager();
-            transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+    @Bean
+    public PlatformTransactionManager getTransactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
-            return transactionManager;
-        }
+        return transactionManager;
+    }
 
-        @Bean
-        public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-            return new PersistenceExceptionTranslationPostProcessor();
-        }
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
-        //==========================================================================================
+    //==========================================================================================
     //    Internationalization configuration beans
     /* messageSource bean is spring built-in bean name which will manipulate internationalization messages.
      * All message files is saved in src/main/resources/ folder, if the config folder do not exist, you need to create it first by hand.
@@ -205,11 +205,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getLocaleInterceptor());
-    }
-
-    @Bean
-    public CreateFakeUsers getFillTables() throws IOException {
-        return new CreateFakeUsers();
     }
 
     // is used in SecurityConfig to help tracking users
