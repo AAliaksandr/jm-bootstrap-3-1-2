@@ -2,30 +2,37 @@ package webBackend.service;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import webBackend.model.Role;
+import webBackend.model.User;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class CreateFakeUsers {
-    private final String namesUri = "/filling/names.txt";
-    private final String lastNamesUri = "/filling/last-names.txt";
-    private final String colorUri = "/filling/colors.txt";
-    private final String carLabelsUri = "/filling/car-labels.txt";
-    private final String regNumbersUri = "/filling/car-registration-numbers.txt";
+    private final UserService userService;
 
-    public CreateFakeUsers(){}
+    private  final String namesUri = "/filling/names.txt";
+    private  final String lastNamesUri = "/filling/last-names.txt";
+    private  final String colorUri = "/filling/colors.txt";
+    private  final String carLabelsUri = "/filling/car-labels.txt";
+    private  final String regNumbersUri = "/filling/car-registration-numbers.txt";
 
-    public List<String> getNames() throws IOException {
+    public CreateFakeUsers(UserService userService){
+        this.userService = userService;
+    }
+
+    public   List<String> getNames() throws IOException {
         List<String>  maleNames = Files.lines(new ClassPathResource(namesUri).getFile().toPath())
                 .collect(Collectors.toList());
 
         return maleNames;
     }
 
-    public List<String> getLastNames() throws IOException {
+    public   List<String> getLastNames() throws IOException {
         List<String>  maleLastNames = Files.lines(new ClassPathResource(lastNamesUri).getFile().toPath())
                 .collect(Collectors.toList());
 
@@ -44,5 +51,38 @@ public class CreateFakeUsers {
             }
         }
         return builder.toString();
+    }
+
+    public  void createFakeUsers() throws IOException {
+        for(long i = 1L; i <= 9; i++) {
+            User user = new User(getNames().get((int) i),
+                    getLastNames().get((int) i),
+                    i,
+                    this.transliterate(getNames().get((int) i)) + "@mail.ru",
+                    "123456");
+            List<Role> roles = new ArrayList<>();
+            Role role = new Role();
+            role.setRole("USER");
+            roles.add(role);
+            user.setRoles(roles);
+            userService.addUser(user);
+        }
+        User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
+        List<Role> roles2 = new ArrayList<>();
+        Role role2 = new Role();
+        role2.setRole("USER");
+        roles2.add(role2);
+        user2.setRoles(roles2);
+
+        userService.addUser(user2);
+
+        User admin2 = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
+        List<Role> adminRoles = new ArrayList<>();
+        Role adminRole = new Role();
+        adminRole.setRole("ADMIN");
+        adminRoles.add(adminRole);
+        admin2.setRoles(adminRoles);
+
+        userService.addUser(admin2);
     }
 }

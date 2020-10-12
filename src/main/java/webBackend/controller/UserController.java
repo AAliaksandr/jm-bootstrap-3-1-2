@@ -35,36 +35,7 @@ public class UserController {
 
     @PostConstruct
     public void fillInTables() throws IOException {
-        for(long i = 1L; i <= 9; i++) {
-            User user = new User(createFakeUsers.getNames().get((int) i),
-                    createFakeUsers.getLastNames().get((int) i),
-                    i,
-                    createFakeUsers.transliterate(createFakeUsers.getNames().get((int) i)) + "@mail.ru",
-                    "123456");
-            List<Role> roles = new ArrayList<>();
-            Role role = new Role();
-            role.setRole("USER");
-            roles.add(role);
-            user.setRoles(roles);
-            userService.addUser(user);
-        }
-        User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
-        List<Role> roles2 = new ArrayList<>();
-        Role role2 = new Role();
-        role2.setRole("USER");
-        roles2.add(role2);
-        user2.setRoles(roles2);
-
-        userService.addUser(user2);
-
-        User admin2 = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
-        List<Role> adminRoles = new ArrayList<>();
-        Role adminRole = new Role();
-        adminRole.setRole("ADMIN");
-        adminRoles.add(adminRole);
-        admin2.setRoles(adminRoles);
-
-        userService.addUser(admin2);
+        createFakeUsers.createFakeUsers();
     }
 
     @GetMapping(value = {"/"})
@@ -85,7 +56,12 @@ public class UserController {
     @GetMapping(value = "/admin")
     public String getAdminProfile(Principal principal, Model model) {
 //        model.addAttribute("allUsers", userService.getAllUsers());
-        model.addAttribute("allUsers", allUsersAndModals.AllUsersForListAndModalsAndGetTheObject(userService.getAllUsers()));
+        List<User> allUsers = userService.getAllUsers();
+        // For unsetting a password to work with no side effects like deleting all users' passwords
+        // I had to make a hint "readOnly" in the fetch query
+        // otherwise the Entities would still be in the managed state
+        allUsers.forEach(x -> x.setPassword(""));
+        model.addAttribute("allUsers", allUsersAndModals.AllUsersForListAndModalsAndGetTheObject(allUsers));
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "Admin Profile");
         model.addAttribute("newUser", new User());
@@ -134,9 +110,13 @@ public class UserController {
         User updateUser = allUsers.getAllUsersForListAndModals().get( allUsers.getAllUsersForListAndModals().size() - 1);
 
         if (updateUser.getRoles().isEmpty()) {
-            List<Role> roleOnOcasion = new ArrayList<>();
-            roleOnOcasion.add(new Role("USER"));
-            updateUser.setRoles(roleOnOcasion);
+            List<Role> role = new ArrayList<>();
+            role.add(new Role("USER"));
+            updateUser.setRoles(role);
+        }
+
+        if (updateUser.getPassword().isEmpty()) {
+            updateUser.setPassword(userService.getUserById(updateUser.getId()).getPassword());
         }
         userService.updateUser(updateUser);
         model.addAttribute("updated_user", updateUser);
