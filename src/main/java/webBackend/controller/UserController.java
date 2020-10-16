@@ -21,15 +21,13 @@ public class UserController {
     private final UserService userService;
     private final Validator validator;
     private final CreateFakeUsers createFakeUsers;
-    private final RoleManager roleManager;
     private final AllUsersListAndModalsManager allUsersAndModals;
 
 
-    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, RoleManager roleManager, AllUsersListAndModalsManager allUsersAndModals) {
+    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, AllUsersListAndModalsManager allUsersAndModals) {
         this.userService = userService;
         this.validator = validator;
         this.createFakeUsers = createFakeUsers;
-        this.roleManager = roleManager;
         this.allUsersAndModals = allUsersAndModals;
     }
 
@@ -65,7 +63,7 @@ public class UserController {
         model.addAttribute("authorisedUser", userService.getUserByEmail(principal.getName()));
         model.addAttribute("title", "Admin Profile");
         model.addAttribute("newUser", new User());
-        model.addAttribute("allTheRoles", roleManager);
+        model.addAttribute("allTheRoles", userService.getAllRoles());
         model.addAttribute("userToUpdate", new User());
         return "admin-or-user";
     }
