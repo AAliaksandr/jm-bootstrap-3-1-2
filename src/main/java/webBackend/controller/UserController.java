@@ -115,7 +115,7 @@ public class UserController {
 
         if (updateUser.getRoles().isEmpty()) {
             List<Role> role = new ArrayList<>();
-            role.add(userService.getRole("USER"));
+            role.add(roleService.getRole("USER"));
             updateUser.setRoles(role);
         }
 

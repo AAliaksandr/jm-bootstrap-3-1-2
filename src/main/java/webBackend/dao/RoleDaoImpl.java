@@ -28,4 +28,10 @@ public class RoleDaoImpl implements RoleDao {
     public List<Role> getAllRoles() {
         return entitymanager.createQuery("SELECT DISTINCT r FROM Role r ORDER BY r.id ", Role.class).getResultList();
     }
+
+    @Override
+    public Role getRole(String roleName) {
+        return entitymanager.createQuery("SELECT DISTINCT r FROM Role r WHERE r.role = :roleName" , Role.class)
+                .setParameter("roleName", roleName).getSingleResult();
+    }
 }

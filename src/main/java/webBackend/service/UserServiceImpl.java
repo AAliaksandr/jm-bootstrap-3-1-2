@@ -68,9 +68,4 @@ public class UserServiceImpl implements UserService {
     // «Пользователь» – это просто Object. В большинстве случаев он может быть
     //  приведен к классу UserDetails.
     // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
-
-    @Override
-    public Role getRole(String roleName) {
-        return userDao.getRole(roleName);
-    }
 }

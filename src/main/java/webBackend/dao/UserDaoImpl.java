@@ -77,9 +77,7 @@ public class UserDaoImpl implements UserDao {
         return entitymanager.merge(user);
     }
 
-
-    @Override
-    public Role getRole(String roleName) {
+    private Role getRole(String roleName) {
         return entitymanager.createQuery("SELECT DISTINCT r FROM Role r WHERE r.role = :roleName" , Role.class)
                 .setParameter("roleName", roleName).getSingleResult();
     }

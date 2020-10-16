@@ -14,5 +14,4 @@ public interface UserService {
     void deleteUser(long id);
     void updateUser(User user);
     User updateUserAndReturn(User user);
-    Role getRole(String roleName);
 }
