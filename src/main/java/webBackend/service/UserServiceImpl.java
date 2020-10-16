@@ -79,8 +79,4 @@ public class UserServiceImpl implements UserService {
     public Role getRole(String roleName) {
         return userDao.getRole(roleName);
     }
-
-    public void fillRoleIntoTable(Role role) {
-        userDao.fillRoleIntoTable(role);
-    }
 }

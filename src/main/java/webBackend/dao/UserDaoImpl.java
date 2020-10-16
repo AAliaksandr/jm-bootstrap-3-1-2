@@ -78,8 +78,4 @@ public class UserDaoImpl implements UserDao {
         return entitymanager.createQuery("SELECT DISTINCT r FROM Role r WHERE r.role = :roleName" , Role.class)
                 .setParameter("roleName", roleName).getSingleResult();
     }
-
-    public void fillRoleIntoTable(Role role) {
-        entitymanager.persist(role);
-    }
 }

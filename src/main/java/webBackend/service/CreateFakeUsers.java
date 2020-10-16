@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Component
 public class CreateFakeUsers {
     private final UserService userService;
+    private final RoleService roleService;
 
     private  final String namesUri = "/filling/names.txt";
     private  final String lastNamesUri = "/filling/last-names.txt";
@@ -21,8 +22,9 @@ public class CreateFakeUsers {
     private  final String carLabelsUri = "/filling/car-labels.txt";
     private  final String regNumbersUri = "/filling/car-registration-numbers.txt";
 
-    public CreateFakeUsers(UserService userService){
+    public CreateFakeUsers(UserService userService, RoleService roleService){
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     public   List<String> getNames() throws IOException {
@@ -55,10 +57,12 @@ public class CreateFakeUsers {
 
     public  void createFakeUsers() throws IOException {
 
-        Role userRole = new Role("USER");
-        Role adminRole = new Role("ADMIN");
-        userService.fillRoleIntoTable(userRole);
-        userService.fillRoleIntoTable(adminRole);
+//        Role userRole = new Role("USER");
+//        Role adminRole = new Role("ADMIN");
+        roleService.addRole(new Role("USER"));
+        roleService.addRole(new Role("ADMIN"));
+
+
         for(long i = 1L; i <= 9; i++) {
             User user = new User(getNames().get((int) i),
                     getLastNames().get((int) i),
@@ -69,25 +73,29 @@ public class CreateFakeUsers {
 //            Role role = new Role();
 //            role.setRole("USER");
 //            roles.add(userRole);
-            user.addRole(userService.getRole("USER"));
+            user.addRole(roleService.getRoleByName("USER"));
             userService.addUser(user);
+/*            user.addRole(userRole);
+            userService.updateUser(user);*/
         }
         User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
         List<Role> roles2 = new ArrayList<>();
 //        Role role2 = new Role();
 //        role2.setRole("USER");
 //        roles2.add(userRole);
-        user2.addRole(userService.getRole("USER"));
-
+        user2.addRole(roleService.getRoleByName("USER"));
         userService.addUser(user2);
+/*        user2.addRole(userRole);
+        userService.updateUser(user2);*/
 
         User admin2 = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
         List<Role> adminRoles = new ArrayList<>();
 //        Role adminRole = new Role();
 //        adminRole.setRole("ADMIN");
 //        adminRoles.add(adminRole);
-        admin2.addRole(userService.getRole("ADMIN"));
-
+        admin2.addRole(roleService.getRoleByName("ADMIN"));
         userService.addUser(admin2);
+/*        admin2.addRole(adminRole);
+        userService.updateUser(admin2);*/
     }
 }
