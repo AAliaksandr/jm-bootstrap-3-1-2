@@ -38,8 +38,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> query = entitymanager.createQuery("SELECT DISTINCT u FROM User u ORDER BY u.id ", User.class)
-                .setHint( "org.hibernate.readOnly", true );
+        TypedQuery<User> query = entitymanager.createQuery("SELECT DISTINCT u FROM User u ORDER BY u.id ", User.class);
         return query.getResultList();
     }
 
@@ -50,7 +49,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        user.setRoles(user.getRoles().stream().map(x-> getRole(x.getRole())).collect(Collectors.toList()));
+        user.setRoles(user.getRoles()
+                .stream()
+                .map(x-> getRole(x.getRole()))
+                .collect(Collectors.toList()));
         entitymanager.persist(user);
     }
 
@@ -62,6 +64,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+        user.setRoles(user.getRoles()
+                .stream()
+                .map(x-> getRole(x.getRole()))
+                .collect(Collectors.toList()));
         entitymanager.merge(user);
     }
 

@@ -74,6 +74,7 @@ public class CreateFakeUsers {
             Role role = new Role();
             role.setRole("USER");
             roles.add(role);
+            user.setRoles(roles);
             userService.addUser(user);
         }
         User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
