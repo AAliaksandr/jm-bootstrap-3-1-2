@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -49,6 +50,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
+        user.setRoles(user.getRoles().stream().map(x-> getRole(x.getRole())).collect(Collectors.toList()));
         entitymanager.persist(user);
     }
 

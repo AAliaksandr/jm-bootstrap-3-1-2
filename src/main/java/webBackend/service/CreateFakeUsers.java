@@ -59,8 +59,9 @@ public class CreateFakeUsers {
 
 //        Role userRole = new Role("USER");
 //        Role adminRole = new Role("ADMIN");
-        roleService.addRole(new Role("USER"));
-        roleService.addRole(new Role("ADMIN"));
+            roleService.addRole(new Role("USER"));
+            roleService.addRole(new Role("ADMIN"));
+
 
 
         for(long i = 1L; i <= 9; i++) {
@@ -70,32 +71,27 @@ public class CreateFakeUsers {
                     this.transliterate(getNames().get((int) i)) + "@mail.ru",
                     "123456");
             List<Role> roles = new ArrayList<>();
-//            Role role = new Role();
-//            role.setRole("USER");
-//            roles.add(userRole);
-            user.addRole(roleService.getRoleByName("USER"));
+            Role role = new Role();
+            role.setRole("USER");
+            roles.add(role);
             userService.addUser(user);
-/*            user.addRole(userRole);
-            userService.updateUser(user);*/
         }
         User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
         List<Role> roles2 = new ArrayList<>();
-//        Role role2 = new Role();
-//        role2.setRole("USER");
-//        roles2.add(userRole);
-        user2.addRole(roleService.getRoleByName("USER"));
+        Role role2 = new Role();
+        role2.setRole("USER");
+        roles2.add(role2);
+        user2.setRoles(roles2);
         userService.addUser(user2);
-/*        user2.addRole(userRole);
-        userService.updateUser(user2);*/
 
-        User admin2 = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
-        List<Role> adminRoles = new ArrayList<>();
-//        Role adminRole = new Role();
-//        adminRole.setRole("ADMIN");
-//        adminRoles.add(adminRole);
-        admin2.addRole(roleService.getRoleByName("ADMIN"));
-        userService.addUser(admin2);
-/*        admin2.addRole(adminRole);
-        userService.updateUser(admin2);*/
+        User fakeAdmin = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
+        List<Role> roles3 = new ArrayList<>();
+        Role role3 = new Role();
+        role3.setRole("ADMIN");
+        roles3.add(role3);
+        fakeAdmin.setRoles(roles3);
+        userService.addUser(fakeAdmin);
+        
+
     }
 }
