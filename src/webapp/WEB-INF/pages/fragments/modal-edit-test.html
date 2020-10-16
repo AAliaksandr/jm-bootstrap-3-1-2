@@ -73,9 +73,10 @@
                             <div class="form-group">
                                 <label >Роли</label>
                                 <!--/*@thymesVar id="allTheRoles" type="java.util.List"*/-->
+                                <!--/*@thymesVar id="rolem" type="webBackend.model.Role"*/-->
                                 <select size="2" th:multiple="multiple" class="form-control" th:field="*{allUsersForListAndModals[__${userOfAllStat.index}__].roles}">
-                                    <option th:each="rolem : ${allTheRoles}" th:name="${rolem}"
-                                            th:value="${rolem}" th:utext="${rolem}">
+                                    <option th:each="rolem : ${allTheRoles}" th:name="${rolem.role}"
+                                            th:value="${rolem.role}" th:utext="${rolem.role}">
 <!--                                            th:with="roleList=${{allUsers.getAllUsersForListAndModals().get(__${userOfAllStat.index}__).roles}}"
                                             th:selected="${#lists.contains(__${roleList}__, __${rolem}__)}">-->
                                     </option>
