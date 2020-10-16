@@ -3,6 +3,7 @@ package webBackend.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import webBackend.dao.UserDao;
+import webBackend.model.Role;
 import webBackend.model.User;
 
 import java.util.List;
@@ -73,4 +74,9 @@ public class UserServiceImpl implements UserService {
     //  приведен к классу UserDetails.
     // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
 
+
+    @Override
+    public List<Role> getAllRoles() {
+        return userDao.getAllRoles();
+    }
 }

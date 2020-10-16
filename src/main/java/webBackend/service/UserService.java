@@ -1,5 +1,6 @@
 package webBackend.service;
 
+import webBackend.model.Role;
 import webBackend.model.User;
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface UserService {
     void deleteUser(long id);
     void updateUser(User user);
     User updateUserAndReturn(User user);
+    List<Role> getAllRoles();
 }

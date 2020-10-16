@@ -1,5 +1,6 @@
 package webBackend.dao;
 
+import webBackend.model.Role;
 import webBackend.model.User;
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserDao {
     void deleteUser(long id);
     void updateUser(User user);
     User updateUserAndReturn(User user);
+    List<Role> getAllRoles();
 }

@@ -41,6 +41,11 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "user-roles",
+            joinColumns = { @JoinColumn(name = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "id") }
+    )
     private List<Role> roles = new ArrayList<>();
 
     public User() {}

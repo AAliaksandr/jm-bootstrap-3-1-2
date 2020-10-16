@@ -1,6 +1,7 @@
 package webBackend.dao;
 
 import org.springframework.stereotype.Repository;
+import webBackend.model.Role;
 import webBackend.model.User;
 
 import javax.persistence.EntityManager;
@@ -65,5 +66,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User updateUserAndReturn(User user) {
         return entitymanager.merge(user);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return entitymanager.createQuery("SELECT DISTINCT r FROM Role r ORDER BY r.id ", Role.class).getResultList();
     }
 }
