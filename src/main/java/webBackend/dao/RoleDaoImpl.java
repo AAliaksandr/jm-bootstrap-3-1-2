@@ -5,6 +5,7 @@ import webBackend.model.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -14,16 +15,17 @@ public class RoleDaoImpl implements RoleDao {
     
     @Override
     public void addRole(Role role) {
-        try {
             entitymanager.persist(role);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public Role getRoleByName(String roleName) {
         return entitymanager.createQuery("SELECT r FROM Role r WHERE r.role = :roleName", Role.class)
                 .setParameter("roleName", roleName).getSingleResult();
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return entitymanager.createQuery("SELECT DISTINCT r FROM Role r ORDER BY r.id ", Role.class).getResultList();
     }
 }

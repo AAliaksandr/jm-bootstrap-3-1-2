@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import webBackend.dao.RoleDao;
 import webBackend.model.Role;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
@@ -23,5 +25,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleByName(String roleName) {
         return roleDao.getRoleByName(roleName);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDao.getAllRoles();
     }
 }
