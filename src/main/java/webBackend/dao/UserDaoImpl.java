@@ -38,7 +38,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> query = entitymanager.createQuery("SELECT DISTINCT u FROM User u ORDER BY u.id ", User.class);
+        TypedQuery<User> query = entitymanager.createQuery("SELECT DISTINCT u FROM User u ORDER BY u.id ", User.class)
+                .setHint( "org.hibernate.readOnly", true );
         return query.getResultList();
     }
 
