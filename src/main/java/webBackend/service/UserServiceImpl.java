@@ -79,4 +79,9 @@ public class UserServiceImpl implements UserService {
     public List<Role> getAllRoles() {
         return userDao.getAllRoles();
     }
+
+    @Override
+    public Role getRole(String roleName) {
+        return userDao.getRole(roleName);
+    }
 }
