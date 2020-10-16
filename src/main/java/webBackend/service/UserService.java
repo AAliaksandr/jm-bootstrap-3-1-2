@@ -16,4 +16,5 @@ public interface UserService {
     User updateUserAndReturn(User user);
     List<Role> getAllRoles();
     Role getRole(String roleName);
+    void fillRoleIntoTable(Role role);
 }
