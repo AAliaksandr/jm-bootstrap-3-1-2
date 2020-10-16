@@ -9,6 +9,7 @@ import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -39,7 +40,7 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Role> roles = new ArrayList<>();
 
     public User() {}
@@ -139,6 +140,16 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public void addRole(Role role) {
+        roles.add( role );
+        role.getUsers().add( this );
+    }
+
+    public void removeRole(Role role) {
+        roles.remove( role );
+        role.getUsers().remove( this );
+    }
+
     public String toString() {
         StringBuilder b = new StringBuilder();
         return b.append("The user id is: ")
@@ -149,5 +160,21 @@ public class User implements UserDetails {
                 .append(this.email)
                 .append("\n the password is: ")
                 .append(this.password).toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getAge() == user.getAge() &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getLastName(), user.getLastName()) &&
+                getEmail().equals(user.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getLastName(), getAge(), getEmail());
     }
 }
