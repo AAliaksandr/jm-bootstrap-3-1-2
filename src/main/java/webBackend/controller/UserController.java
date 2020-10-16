@@ -22,17 +22,19 @@ public class UserController {
     private final Validator validator;
     private final CreateFakeUsers createFakeUsers;
     private final AllUsersListAndModalsManager allUsersAndModals;
+    private final initializeRoleTable initializeRoleTable;
 
-
-    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, AllUsersListAndModalsManager allUsersAndModals) {
+    public UserController(UserService userService, Validator validator, CreateFakeUsers createFakeUsers, AllUsersListAndModalsManager allUsersAndModals, webBackend.service.initializeRoleTable initializeRoleTable) {
         this.userService = userService;
         this.validator = validator;
         this.createFakeUsers = createFakeUsers;
         this.allUsersAndModals = allUsersAndModals;
+        this.initializeRoleTable = initializeRoleTable;
     }
 
     @PostConstruct
     public void fillInTables() throws IOException {
+//        initializeRoleTable.fillIn();
         createFakeUsers.createFakeUsers();
     }
 

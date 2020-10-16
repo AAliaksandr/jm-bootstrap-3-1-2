@@ -54,6 +54,11 @@ public class CreateFakeUsers {
     }
 
     public  void createFakeUsers() throws IOException {
+
+        Role userRole = new Role("USER");
+        Role adminRole = new Role("ADMIN");
+        userService.fillRoleIntoTable(userRole);
+        userService.fillRoleIntoTable(adminRole);
         for(long i = 1L; i <= 9; i++) {
             User user = new User(getNames().get((int) i),
                     getLastNames().get((int) i),
@@ -61,27 +66,27 @@ public class CreateFakeUsers {
                     this.transliterate(getNames().get((int) i)) + "@mail.ru",
                     "123456");
             List<Role> roles = new ArrayList<>();
-            Role role = new Role();
-            role.setRole("USER");
-            roles.add(role);
-            user.setRoles(roles);
+//            Role role = new Role();
+//            role.setRole("USER");
+//            roles.add(userRole);
+            user.addRole(userService.getRole("USER"));
             userService.addUser(user);
         }
         User user2 = new User("user", "de user", 32, "user@mail.ru", "user");
         List<Role> roles2 = new ArrayList<>();
-        Role role2 = new Role();
-        role2.setRole("USER");
-        roles2.add(role2);
-        user2.setRoles(roles2);
+//        Role role2 = new Role();
+//        role2.setRole("USER");
+//        roles2.add(userRole);
+        user2.addRole(userService.getRole("USER"));
 
         userService.addUser(user2);
 
         User admin2 = new User("admin", "de admin", 42, "admin@mail.ru", "admin");
         List<Role> adminRoles = new ArrayList<>();
-        Role adminRole = new Role();
-        adminRole.setRole("ADMIN");
-        adminRoles.add(adminRole);
-        admin2.setRoles(adminRoles);
+//        Role adminRole = new Role();
+//        adminRole.setRole("ADMIN");
+//        adminRoles.add(adminRole);
+        admin2.addRole(userService.getRole("ADMIN"));
 
         userService.addUser(admin2);
     }
