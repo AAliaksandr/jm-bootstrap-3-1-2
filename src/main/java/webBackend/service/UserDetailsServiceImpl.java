@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import webBackend.dao.UserDao;
 import webBackend.model.User;
 
+import java.util.ArrayList;
+
 @Component
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,6 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDao.getUserByUsername(email);
+        if (user.getRoles().isEmpty()) {
+            return new org.springframework.security.core.userdetails.User("none", "none", new ArrayList());
+        }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 }
