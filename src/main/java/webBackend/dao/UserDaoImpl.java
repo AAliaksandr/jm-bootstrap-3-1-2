@@ -28,7 +28,6 @@ public class UserDaoImpl implements UserDao {
         try {
             return query.getSingleResult();
         } catch(RuntimeException e) {
-            e.printStackTrace();
             return new User();
         }
     }
